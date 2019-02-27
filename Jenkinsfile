@@ -96,17 +96,7 @@ pipeline {
 	  }
 	 }
 	 
-	stage('Dynamic security check') {
-        when {
-          branch 'master'
-        }
-        steps {
-            container('nodejs') {
-              sh "jx get cve --environment staging"
-            }
-        }
-      }
-	 
+
       stage('Promote to Environments') {
         when {
           branch 'master'
