@@ -102,7 +102,7 @@ pipeline {
         }
         steps {
           container('nodejs') {
-	  sh "jx compliance run --verbose"
+	   sh "jx compliance run --verbose"
 		}
 	  }
 	 }
