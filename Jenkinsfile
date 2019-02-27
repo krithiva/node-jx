@@ -91,8 +91,7 @@ pipeline {
         steps {
           dir ('./to-do-app/') {
             container('nodejs') {
-			sh "npm install"
-			sh "npm start"
+			sh "npm test"
 			}
 		}
 		}
