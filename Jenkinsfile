@@ -81,11 +81,20 @@ pipeline {
             sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
 
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
-			sh "jx step validate --min-jx-version 1.2.36"
-			sh "jx step post build --image \$JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST:\$JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT/$ORG/$APP_NAME:\$(cat VERSION)"
-          }
+		    }
         }
       }
+	  stage('Analysis') {
+        when {
+          branch 'master'
+        }
+        steps {
+          container('nodejs') {
+	  sh "jx step validate --min-jx-version 1.2.36"
+	  sh "jx step post build --image \$JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST:\$JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT/$ORG/$APP_NAME:\$(cat VERSION)"
+		}
+	  }
+	 }
       stage('Promote to Environments') {
         when {
           branch 'master'
