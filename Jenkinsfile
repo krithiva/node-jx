@@ -93,7 +93,7 @@ pipeline {
             container('nodejs') {
 			sh "npm stop"
 			sh "npm install"
-			sh "npm start &"
+			sh "npm start --port 8081&"
 			sh "npm test"
 			}
 		}
