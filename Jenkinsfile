@@ -96,16 +96,19 @@ pipeline {
 	  }
 	 }
 	 
-	  stage('Complaince') {
+	stage('Dynamic security check') {
         when {
           branch 'master'
         }
         steps {
-          container('nodejs') {
-	   sh "jx compliance run --verbose"
-		}
-	  }
-	 }
+          dir ('/home/cloudsaplbg/node-http-demo1') {
+            container('nodejs') {
+              sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t $(cat .previewUrl) || if [ $? -eq 1 ]; then exit 1; else exit 0; fi'
+            }
+          }
+        }
+      }
+	 
       stage('Promote to Environments') {
         when {
           branch 'master'
