@@ -84,22 +84,7 @@ pipeline {
 		    }
         }
       }
-	  stage('BDD') {
-        when {
-          branch 'master'
-        }
-        steps {
-          dir ('./to-do-app/') {
-            container('nodejs') {
-			sh "npm stop"
-			sh "npm install"
-			sh "npm start --port 8081&"
-			sh "npm test"
-			}
-		}
-		}
-		}
-	  stage('Analysis') {
+	 stage('Analysis') {
         when {
           branch 'master'
         }
