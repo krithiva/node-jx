@@ -95,6 +95,17 @@ pipeline {
 		}
 	  }
 	 }
+	 
+	  stage('Complaince') {
+        when {
+          branch 'master'
+        }
+        steps {
+          container('nodejs') {
+	  sh "jx compliance run --verbose"
+		}
+	  }
+	 }
       stage('Promote to Environments') {
         when {
           branch 'master'
