@@ -103,7 +103,7 @@ pipeline {
         steps {
           dir ('/home/jenkins/workspace/krithiva_node-jx_master') {
             container('nodejs') {
-              sh 'docker run -it owasp/zap2docker-stable zap-baseline.py -t $(cat .previewUrl) || if [ $? -eq 1 ]; then exit 1; else exit 0; fi'
+              sh "jx get cve --environment staging"
             }
           }
         }
