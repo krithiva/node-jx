@@ -101,11 +101,9 @@ pipeline {
           branch 'master'
         }
         steps {
-          dir ('/home/jenkins/workspace/krithiva_node-jx_master') {
             container('nodejs') {
               sh "jx get cve --environment staging"
             }
-          }
         }
       }
 	 
