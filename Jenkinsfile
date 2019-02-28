@@ -42,6 +42,7 @@ pipeline {
                sh "npm install"
                sh "node . &"
                sh "npm test"
+			   sh "npm stop"
                 echo 'Testing..'
             }
         }
