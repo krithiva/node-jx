@@ -32,3 +32,6 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
+
+podAnnotations:
+  jenkins-x.io/cve-image-id: 2a5cc3070e53ed958fcdc8f84aa0c8b6f806ab87147d2b6b042e7adb585e7090
