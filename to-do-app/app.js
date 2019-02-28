@@ -16,8 +16,8 @@ app.put('/items/:id', ApiController.put_item);
 
 app.delete('/items/:id',  ApiController.delete_item);
 
-const server = app.listen(8080,  () => {
-    console.log('TO-DO APP running at port 8080!');
+const server = app.listen(8081,  () => {
+    console.log('TO-DO APP running at port 8081!');
     app.emit("server_started_up");
 });
 
