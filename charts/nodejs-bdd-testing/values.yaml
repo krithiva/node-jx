@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: draft
-  tag: dev
+  repository: 10.35.244.69:5000/krithiva/nodejs-bdd-testing
+  tag: 0.0.19
   pullPolicy: IfNotPresent
 service:
   name: nodejs-bdd-testing
@@ -32,3 +32,6 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
+
+podAnnotations:
+  jenkins-x.io/cve-image-id: 4bef57571a1724587440b895de8acc83374310ba4fdf92821ba697b2516b0509
