@@ -106,7 +106,7 @@ pipeline {
 		  dir ('./to-do-app') {
           container('nodejs') {
             sh "npm install"
-			sh "npm start &"
+			sh "npm start --port 8081 &"
 			sh "npm test"
        
           }
