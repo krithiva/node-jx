@@ -55,35 +55,7 @@ pipeline {
       }
       }
 
-      stage('Build Release') {
-        when {
-          branch 'master'
-        }
-        steps {
-          container('nodejs') {
-            // ensure we're not on a detached head
-            sh "git checkout master"
-            sh "git config --global credential.helper store"
-
-            sh "jx step git credentials"
-            // so we can retrieve the version in later steps
-            sh "echo \$(jx-release-version) > VERSION"
-          }
-          dir ('./charts/node-http-demo1') {
-            container('nodejs') {
-              sh "make tag"
-            }
-          }
-          container('nodejs') {
-            sh "npm install"
-            sh "CI=true DISPLAY=:99 npm test"
-
-            sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
-
-            sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
-		    }
-        }
-      }
+     
 	   stage('BDD') {
         when {
           branch 'master'
@@ -106,7 +78,6 @@ pipeline {
 		  dir ('./to-do-app') {
           container('nodejs') {
             sh "npm install"
-			sh "npm start --port 8081 &"
 			sh "npm test"
        
           }
